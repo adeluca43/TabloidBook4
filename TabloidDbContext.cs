@@ -4,6 +4,7 @@ using Tabloid.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace Tabloid.Data;
+
 public class TabloidDbContext : IdentityDbContext<IdentityUser>
 {
     private readonly IConfiguration _configuration;
@@ -145,5 +146,132 @@ public class TabloidDbContext : IdentityDbContext<IdentityUser>
                 IdentityUserId = "d224a03d-bf0c-4a05-b728-e3521e45d74d",
             }
         });
+
+        modelBuilder.Entity<Category>().HasData(new Category[]
+    {
+         new Category { Id = 1, Name = "Cooking" },
+         new Category { Id = 2, Name = "Entertainment" },
+         new Category { Id = 3, Name = "History" },
+         new Category { Id = 4, Name = "Music" },
+         new Category { Id = 5, Name = "Pictures" },
+         new Category { Id = 6, Name = "Science" },
+         new Category { Id = 7, Name = "Technology" }
+        });
+
+        modelBuilder.Entity<Post>().HasData(new Post[]
+
+    {
+        new Post
+        {
+            Id = 1,
+            Title = "Tech and the Future of Us",
+            SubTitle = "What happens next?",
+            Body = "The future sure is coming fast. Let’s explore where we’re headed.",
+            PublishingDate = new DateTime(2023, 12, 23),
+            HeaderImage = "https://example.com/tech-future.jpg",
+            CategoryId = 7,
+            UserProfileId = 2
+        },
+    new Post
+    {
+        Id = 2,
+        Title = "NSS Demo Day",
+        SubTitle = "Showcase of projects",
+        Body = "Demo Day highlights the amazing work of Nashville Software School students.",
+        PublishingDate = new DateTime(2023, 12, 21),
+        HeaderImage = "https://example.com/nss-demo.jpg",
+        CategoryId = 6,
+        UserProfileId = 3
+    },
+    new Post
+    {
+        Id = 3,
+        Title = "The Crazy Time We Live",
+        SubTitle = "A wild look at modern life",
+        Body = "From AI to climate change, the world feels faster than ever.",
+        PublishingDate = new DateTime(2023, 12, 20),
+        HeaderImage = "https://example.com/crazy-times.jpg",
+        CategoryId = 2,
+        UserProfileId = 4
+    },
+    new Post
+    {
+        Id = 4,
+        Title = "Cooking with Confidence",
+        SubTitle = "Easy recipes for beginners",
+        Body = "Master the basics of home cooking with these simple meals.",
+        PublishingDate = new DateTime(2023, 11, 15),
+        HeaderImage = "https://example.com/cooking.jpg",
+        CategoryId = 1,
+        UserProfileId = 5
+    },
+    new Post
+    {
+        Id = 5,
+        Title = "Underrated Artists of the 2010s",
+        SubTitle = "Give them a listen!",
+        Body = "Some music just doesn’t get the love it deserves.",
+        PublishingDate = new DateTime(2023, 10, 8),
+        HeaderImage = "https://example.com/artists.jpg",
+        CategoryId = 4,
+        UserProfileId = 6
+    },
+    new Post
+    {
+        Id = 6,
+        Title = "Exploring Ancient Rome",
+        SubTitle = "A trip back in time",
+        Body = "Rome wasn't built in a day, but it sure changed the world.",
+        PublishingDate = new DateTime(2023, 9, 30),
+        HeaderImage = "https://example.com/rome.jpg",
+        CategoryId = 3,
+        UserProfileId = 2
+    },
+    new Post
+    {
+        Id = 7,
+        Title = "Is Time Travel Possible?",
+        SubTitle = "The science says...",
+        Body = "Einstein had some ideas, and so do modern physicists.",
+        PublishingDate = new DateTime(2023, 9, 15),
+        HeaderImage = "https://example.com/timetravel.jpg",
+        CategoryId = 6,
+        UserProfileId = 3
+    },
+    new Post
+    {
+        Id = 8,
+        Title = "Coding Bootcamps: Are They Worth It?",
+        SubTitle = "A grad’s perspective",
+        Body = "Here’s what I learned (and didn’t learn) from my experience.",
+        PublishingDate = new DateTime(2023, 8, 22),
+        HeaderImage = "https://example.com/bootcamp.jpg",
+        CategoryId = 7,
+        UserProfileId = 4
+    },
+    new Post
+    {
+        Id = 9,
+        Title = "Easy Weeknight Meals",
+        SubTitle = "Save time, eat well",
+        Body = "These 20-minute meals will make your evenings smoother.",
+        PublishingDate = new DateTime(2023, 7, 5),
+        HeaderImage = "https://example.com/weeknight-meals.jpg",
+        CategoryId = 1,
+        UserProfileId = 5
+    },
+    new Post
+    {
+        Id = 10,
+        Title = "Understanding the Electoral College",
+        SubTitle = "Why does it matter?",
+        Body = "It’s confusing — here’s a breakdown that actually makes sense.",
+        PublishingDate = new DateTime(2023, 6, 30),
+        HeaderImage = "https://example.com/electoral.jpg",
+        CategoryId = 2,
+        UserProfileId = 6
+    }
+    });
+
     }
 }
