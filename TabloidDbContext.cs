@@ -14,6 +14,12 @@ public class TabloidDbContext : IdentityDbContext<IdentityUser>
 
 
 
+
+    public DbSet<Post> Posts { get; set; }
+    public DbSet<PostTag> PostTags { get; set; }
+    public DbSet<Tag> Tags { get; set; }
+
+
     public TabloidDbContext(DbContextOptions<TabloidDbContext> context, IConfiguration config) : base(context)
     {
         _configuration = config;
