@@ -37,7 +37,7 @@ public class PostController : ControllerBase
         _dbContext.Posts.Add(post);
         _dbContext.SaveChanges();
 
-        return CreatedAtAction(nameof(GetPostById), new { id = post.Id }, post);
+        return Ok(post);
     }
 
     [HttpGet("{id}")]

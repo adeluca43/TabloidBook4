@@ -16,14 +16,12 @@ export default function CreatePost({ loggedInUser }) {
     userProfileId: loggedInUser.id
   })
 
-  useEffect(() => {
-    fetch("/api/category")
-      .then(res => res.json())
-      .then(data => setCategories(data))
-  }, [])
+  /* useEffect(() => {
+  getAllCategories().then(setCategories);
+}, []); */
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
+  const handleChange = (event) => {
+    const { name, value } = event.target
     setPost({ ...post, [name]: value })
   }
 
