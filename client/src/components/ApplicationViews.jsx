@@ -5,6 +5,7 @@ import Register from "./auth/Register";
 import UserProfileList from "./userprofiles/UserProfilesList";
 import UserProfileDetails from "./userprofiles/UserProfileDetails";
 import CreatePost from "./Posts/CreatePost";
+import Home from "./Home/Home";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -14,7 +15,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           index
           element={
             <AuthorizedRoute loggedInUser={loggedInUser}>
-              <p>Welcome to Tabloid!</p>
+              <Home />
             </AuthorizedRoute>
           }
         />
