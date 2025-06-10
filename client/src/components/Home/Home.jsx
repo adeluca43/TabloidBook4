@@ -1,21 +1,45 @@
 import { useEffect, useMemo, useState } from "react";
-import { getAllPosts } from "../../managers/PostManager";
+import { deletePost, EditPost, getAllPosts } from "../../managers/PostManager";
 import debounce from 'lodash.debounce';
 import { useNavigate } from 'react-router-dom';
 import "./Home.css";
 import { Link } from "react-router-dom";
+import { Edit, Trash } from "lucide-react"
 
-export default function Home() {
-    const Navigate = useNavigate()
+export default function Home({loggedInUser}) {
+  const Navigate = useNavigate()
   const [allPosts, setAllPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formData, setFormData] = useState({});
+  
   useEffect(() => {
     getAllPosts().then(res => {
       setAllPosts(res);
       setFilteredPosts(res);
     });
   }, []);
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!formData?.id) return;
+    const formToSend = {
+      id: formData.id,
+      categoryId: formData.categoryId,
+      subTitle: formData.subTitle,
+      title: formData.title,
+      headerImage: formData.headerImage,
+      body: formData.body
+    }
+    EditPost(formToSend).then(() => {
+      getAllPosts().then(res => {
+        setAllPosts(res);
+        setFilteredPosts(res);
+        setIsModalOpen(false);
+        setFormData({})
+      })
+    })
+  };
 
   const handleSearch = useMemo(() =>
     debounce((query) => {
@@ -58,6 +82,29 @@ export default function Home() {
 ))}
 
       </div>
+        {isModalOpen && (
+    <div className="modal-overlay">
+      <div className="modal-content">
+        <h2>Edit Post</h2>
+        <form onSubmit={handleSubmit}>
+          <input type="text" value={formData.title} placeholder="Title" required
+            onChange={(e) => setFormData({ ...formData, title: e.target.value })}/>
+          <input type="text" value={formData.subTitle} placeholder="Subtitle"
+            onChange={(e) => setFormData({ ...formData, subTitle: e.target.value })}/>
+          <textarea value={formData.body} placeholder="Body" required
+          onChange={(e) => setFormData({ ...formData, body: e.target.value })}/>
+          <input type="text" value={formData.categoryId} placeholder="Category ID"
+            onChange={(e) => setFormData({ ...formData, categoryId: e.target.value })}/>
+          <input type="text" value={formData.headerImage} placeholder="Header Image URL"
+            onChange={(e) => setFormData({ ...formData, headerImage: e.target.value })}/>
+          <div className="modal-actions">
+            <button type="submit" disabled={handleSubmit}>Update</button>
+            <button type="button" onClick={() => {setIsModalOpen(false)}}>Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  )}
     </div>
   );
 }

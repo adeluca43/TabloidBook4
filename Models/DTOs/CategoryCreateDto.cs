@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Tabloid.Models.DTOs;
 
-public class CategoryCreateDto
+public class CategoryCreateDTO
 {
     [Required]
     [MaxLength(100)]
