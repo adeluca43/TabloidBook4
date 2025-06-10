@@ -9,6 +9,7 @@ import Home from "./Home/Home";
 import ManageCategories from "./category/ManageCategories";
 import PostDetails from "./Posts/PostDetails";
 
+import MyPosts from "./Posts/MyPosts";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -61,6 +62,14 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           element={
             <AuthorizedRoute loggedInUser={loggedInUser} roles={["Admin"]}>
               <ManageCategories />
+            </AuthorizedRoute>
+          }
+        />
+        <Route
+          path="/myposts"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <MyPosts loggedInUser={loggedInUser} />
             </AuthorizedRoute>
           }
         />
