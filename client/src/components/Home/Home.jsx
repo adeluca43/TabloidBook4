@@ -70,18 +70,44 @@ export default function Home({loggedInUser}) {
         <button className="search-button">Search</button>
       </div>
 
-      <div className="posts-grid">
-        {filteredPosts.map(post => (
-        <Link to={`/posts/${post.id}`} key={post.id} className="post-card-link">
-         <div className="post-card">
-          <h2 className="post-title">{post.title}</h2>
-          <p className="post-body">{post.body}</p>
-          <p className="post-author">{post?.userProfile.fullName}</p>
-        </div>
-        </Link>
-))}
+       <div className="posts-grid">
+      {filteredPosts.map((post) => (
+        <div key={post.id} className="post-card">
+          <Link to={`/posts/${post.id}`} className="post-card-link">
+            <h2 className="post-title">{post.title}</h2>
+            <p className="post-body">{post.body}</p>
+            <p className="post-author">{post?.userProfile.fullName}</p>
+          </Link>
 
-      </div>
+          {post.userProfile.id === loggedInUser.id && (
+            <>
+              <button
+                onClick={() => {
+                  deletePost(post.id).then(() => {
+                    getAllPosts().then((res) => {
+                      setAllPosts(res);
+                      setFilteredPosts(res);
+                    });
+                  });
+                }}
+              >
+                <Trash />
+              </button>
+
+              <button
+                onClick={() => {
+                  setFormData(post);
+                  setIsModalOpen(true);
+                }}
+              >
+                <Edit />
+              </button>
+            </>
+          )}
+        </div>
+      ))}
+    </div>
+
         {isModalOpen && (
     <div className="modal-overlay">
       <div className="modal-content">
