@@ -3,6 +3,7 @@ import { deletePost, EditPost, getAllPosts } from "../../managers/PostManager";
 import debounce from 'lodash.debounce';
 import { useNavigate } from 'react-router-dom';
 import "./Home.css";
+import { Link } from "react-router-dom";
 import { Edit, Trash } from "lucide-react"
 
 export default function Home({loggedInUser}) {
@@ -69,32 +70,44 @@ export default function Home({loggedInUser}) {
         <button className="search-button">Search</button>
       </div>
 
-      <div className="posts-grid">
-        {filteredPosts.map(post => (
-          <div key={post.id} className="post-card">
+       <div className="posts-grid">
+      {filteredPosts.map((post) => (
+        <div key={post.id} className="post-card">
+          <Link to={`/posts/${post.id}`} className="post-card-link">
             <h2 className="post-title">{post.title}</h2>
             <p className="post-body">{post.body}</p>
             <p className="post-author">{post?.userProfile.fullName}</p>
-            {post.userProfile.id === loggedInUser.id && (
-              <button onClick={() => {
-                deletePost(post.id).then(() => {
-                  getAllPosts().then(res => {
-                    setAllPosts(res)
-                    setFilteredPosts(res)
-                  })})}}>
+          </Link>
+
+          {post.userProfile.id === loggedInUser.id && (
+            <>
+              <button
+                onClick={() => {
+                  deletePost(post.id).then(() => {
+                    getAllPosts().then((res) => {
+                      setAllPosts(res);
+                      setFilteredPosts(res);
+                    });
+                  });
+                }}
+              >
                 <Trash />
               </button>
-            )}
 
-            {post.userProfile.id === loggedInUser.id && (
-              <button onClick={() => {
-                setFormData(post)
-                setIsModalOpen(true);
-              }}><Edit/></button>
-            )}
-          </div>
-        ))}
-      </div>
+              <button
+                onClick={() => {
+                  setFormData(post);
+                  setIsModalOpen(true);
+                }}
+              >
+                <Edit />
+              </button>
+            </>
+          )}
+        </div>
+      ))}
+    </div>
+
         {isModalOpen && (
     <div className="modal-overlay">
       <div className="modal-content">
