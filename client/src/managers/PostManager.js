@@ -19,3 +19,25 @@ export const createPost = (postData) => {
   }).then(res => res.json())
 }
 
+export const deletePost = (id) => {
+  return fetch(`${apiUrl}/${id}`, {
+    method: "DELETE",
+  }).then((res) => {
+    if (!res.ok) {
+      throw new Error("Failed to delete order");
+    }
+    return res.status === 204 ? null : res.json();
+  });
+
+};
+
+export const EditPost = async(formData) => {
+  const res = await fetch(`${apiUrl}/${formData.id}`, {
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(formData)
+})
+ return res
+};

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { createPost } from "../../managers/PostManager"
+import { getAllCategories } from "../../managers/categoryManagers"
 
 export default function CreatePost({ loggedInUser }) {
   const navigate = useNavigate()
@@ -16,9 +17,9 @@ export default function CreatePost({ loggedInUser }) {
     userProfileId: loggedInUser.id
   })
 
-  /* useEffect(() => {
+   useEffect(() => {
   getAllCategories().then(setCategories);
-}, []); */
+}, []); 
 
   const handleChange = (event) => {
     const { name, value } = event.target
