@@ -6,6 +6,8 @@ import UserProfileList from "./userprofiles/UserProfilesList";
 import UserProfileDetails from "./userprofiles/UserProfileDetails";
 import CreatePost from "./Posts/CreatePost";
 import Home from "./Home/Home";
+import ManageCategories from "./category/ManageCategories";
+
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
@@ -46,12 +48,20 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           element={<Register setLoggedInUser={setLoggedInUser} />}
         />
         <Route
-           path="/posts/create"
-           element={
-         <AuthorizedRoute loggedInUser={loggedInUser}>
-         <CreatePost loggedInUser={loggedInUser} />
-        </AuthorizedRoute>
-         }
+          path="/posts/create"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <CreatePost loggedInUser={loggedInUser} />
+            </AuthorizedRoute>
+          }
+        />
+        <Route
+          path="categories/manage"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser} roles={["Admin"]}>
+              <ManageCategories />
+            </AuthorizedRoute>
+          }
         />
       </Route>
       <Route path="*" element={<p>Whoops, nothing here...</p>} />
