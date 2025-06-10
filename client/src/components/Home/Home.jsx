@@ -3,6 +3,7 @@ import { getAllPosts } from "../../managers/PostManager";
 import debounce from 'lodash.debounce';
 import { useNavigate } from 'react-router-dom';
 import "./Home.css";
+import { Link } from "react-router-dom";
 
 export default function Home() {
     const Navigate = useNavigate()
@@ -47,12 +48,15 @@ export default function Home() {
 
       <div className="posts-grid">
         {filteredPosts.map(post => (
-          <div key={post.id} className="post-card">
-            <h2 className="post-title">{post.title}</h2>
-            <p className="post-body">{post.body}</p>
-            <p className="post-author">{post?.userProfile.fullName}</p>
-          </div>
-        ))}
+        <Link to={`/posts/${post.id}`} key={post.id} className="post-card-link">
+         <div className="post-card">
+          <h2 className="post-title">{post.title}</h2>
+          <p className="post-body">{post.body}</p>
+          <p className="post-author">{post?.userProfile.fullName}</p>
+        </div>
+        </Link>
+))}
+
       </div>
     </div>
   );
