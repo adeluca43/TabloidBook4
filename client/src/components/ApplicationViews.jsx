@@ -5,6 +5,7 @@ import Register from "./auth/Register";
 import UserProfileList from "./userprofiles/UserProfilesList";
 import UserProfileDetails from "./userprofiles/UserProfileDetails";
 import CreatePost from "./Posts/CreatePost";
+import Home from "./Home/Home";
 import ManageCategories from "./category/ManageCategories";
 
 
@@ -16,7 +17,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           index
           element={
             <AuthorizedRoute loggedInUser={loggedInUser}>
-              <p>Welcome to Tabloid!</p>
+              <Home />
             </AuthorizedRoute>
           }
         />
