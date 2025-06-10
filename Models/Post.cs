@@ -11,11 +11,10 @@ public class Post
     public DateTime PublishingDate { get; set; }
     public string HeaderImage { get; set; }
 
-    public int CategoryId { get; set; }
-    public Category Category { get; set; }
+    public int? CategoryId { get; set; }
+    public Category? Category { get; set; }
 
-    public int UserProfileId { get; set; }
-    public UserProfile UserProfile { get; set; }
-
+    public int? UserProfileId { get; set; }
+    public UserProfile? UserProfile { get; set; }
     public List<PostTag> PostTags { get; set; } = new List<PostTag>();
 }

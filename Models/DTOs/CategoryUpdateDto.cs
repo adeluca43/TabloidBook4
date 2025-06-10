@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Tabloid.Models.DTOs;
 
-public class CategoryUpdateDto
+public class CategoryUpdateDTO
 {
     [Required]
     public int Id { get; set; }

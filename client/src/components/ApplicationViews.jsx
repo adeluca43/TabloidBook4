@@ -7,6 +7,7 @@ import UserProfileDetails from "./userprofiles/UserProfileDetails";
 import CreatePost from "./Posts/CreatePost";
 import Home from "./Home/Home";
 import ManageCategories from "./category/ManageCategories";
+import PostDetails from "./Posts/PostDetails";
 
 import MyPosts from "./Posts/MyPosts";
 
@@ -18,7 +19,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           index
           element={
             <AuthorizedRoute loggedInUser={loggedInUser}>
-              <Home />
+              <Home loggedInUser={loggedInUser}/>
             </AuthorizedRoute>
           }
         />
@@ -73,6 +74,14 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           }
         />
       </Route>
+      <Route
+    path="posts/:postId"
+    element={
+      <AuthorizedRoute loggedInUser={loggedInUser}>
+        <PostDetails />
+      </AuthorizedRoute>
+    }
+  />
       <Route path="*" element={<p>Whoops, nothing here...</p>} />
     </Routes>
   );

@@ -19,10 +19,10 @@ public class CategoryController : ControllerBase
 
     // GET: api/category
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategories()
+    public async Task<ActionResult<IEnumerable<CategoryDTO>>> GetCategories()
     {
         var categories = await _context.Categories
-            .Select(c => new CategoryDto
+            .Select(c => new CategoryDTO
             {
                 Id = c.Id,
                 Name = c.Name
@@ -34,7 +34,7 @@ public class CategoryController : ControllerBase
 
     // GET: api/category/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<CategoryDto>> GetCategory(int id)
+    public async Task<ActionResult<CategoryDTO>> GetCategory(int id)
     {
         var category = await _context.Categories.FindAsync(id);
         if (category == null)
@@ -42,7 +42,7 @@ public class CategoryController : ControllerBase
             return NotFound();
         }
 
-        return new CategoryDto
+        return new CategoryDTO
         {
             Id = category.Id,
             Name = category.Name
@@ -51,14 +51,14 @@ public class CategoryController : ControllerBase
 
     // POST: api/category
     [HttpPost]
-    public async Task<ActionResult<CategoryDto>> PostCategory(CategoryCreateDto dto)
+    public async Task<ActionResult<CategoryDTO>> PostCategory(CategoryCreateDTO dto)
     {
         var category = new Category { Name = dto.Name };
 
         _context.Categories.Add(category);
         await _context.SaveChangesAsync();
 
-        var resultDto = new CategoryDto
+        var resultDto = new CategoryDTO
         {
             Id = category.Id,
             Name = category.Name
@@ -69,7 +69,7 @@ public class CategoryController : ControllerBase
 
     // PUT: api/category/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutCategory(int id, CategoryUpdateDto dto)
+    public async Task<IActionResult> PutCategory(int id, CategoryUpdateDTO dto)
     {
         if (id != dto.Id)
         {
