@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Tabloid.Models;
+using Tabloid.Models.DTOs;
 using Tabloid.Data;
 using Microsoft.EntityFrameworkCore;
 
