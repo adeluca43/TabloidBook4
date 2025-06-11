@@ -14,6 +14,7 @@ public class TabloidDbContext : IdentityDbContext<IdentityUser>
     public DbSet<Post> Posts { get; set; }
     public DbSet<PostTag> PostTags { get; set; }
     public DbSet<Tag> Tags { get; set; }
+    public DbSet<Subscription> Subscriptions { get; set; }
 
 
     public TabloidDbContext(DbContextOptions<TabloidDbContext> context, IConfiguration config) : base(context)
@@ -284,5 +285,34 @@ public class TabloidDbContext : IdentityDbContext<IdentityUser>
     );
 
 
+
+
+        modelBuilder.Entity<Subscription>().HasData(new Subscription[]
+    {
+    new Subscription
+    {
+        Id = 1,
+        SubscriberId = 2,
+        AuthorId = 3,
+        SubscribeDate = new DateTime(2024, 1, 10),
+    },
+    new Subscription
+    {
+        Id = 2,
+        SubscriberId = 2,
+        AuthorId = 4,
+        SubscribeDate = new DateTime(2024, 1, 15),
+    },
+    new Subscription
+    {
+        Id = 3,
+        SubscriberId = 3,
+        AuthorId = 5,
+        SubscribeDate = new DateTime(2024, 3, 1),
+
     }
+    });
+
+    }
+
 }
