@@ -11,10 +11,6 @@ public class TabloidDbContext : IdentityDbContext<IdentityUser>
 
     public DbSet<UserProfile> UserProfiles { get; set; }
     public DbSet<Category> Categories { get; set; }
-
-
-
-
     public DbSet<Post> Posts { get; set; }
     public DbSet<PostTag> PostTags { get; set; }
     public DbSet<Tag> Tags { get; set; }
@@ -280,6 +276,13 @@ public class TabloidDbContext : IdentityDbContext<IdentityUser>
         UserProfileId = 6
     }
     });
+        modelBuilder.Entity<Tag>().HasData(
+        new Tag { Id = 1, Name = "Politics" },
+        new Tag { Id = 2, Name = "Science" },
+        new Tag { Id = 3, Name = "Food" },
+        new Tag { Id = 4, Name = "Music" }
+    );
+
 
     }
 }

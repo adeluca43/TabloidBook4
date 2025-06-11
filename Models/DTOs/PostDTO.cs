@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Tabloid.Models.DTOs;
 
-namespace Tabloid.Models;
+namespace Tabloid.Models.DTOs;
 
 public class PostDTO
 {
